@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="description" content="Rich's vinyl record collection and hi-fi setup.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="My Vinyl">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#14110f">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Rich's Vinyl Records</title>
+<style>
+:root{--bg:#14110f;--card:#211d1a;--card2:#2a2521;--line:#3a3430;--ink:#f6efe6;--muted:#b3a89b;--amber:#e8a33d;--amber2:#ffcf7a;--green:#7bd389;--radius:16px;--serif:Georgia,"Palatino Linotype",Palatino,serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(circle at 50% -10%,#2c241d,var(--bg) 60%) fixed;color:var(--ink);line-height:1.45;overflow-x:hidden}
+.page{max-width:68rem;margin:0 auto;padding:1rem .9rem 2.4rem}
+h1,h2{font-family:var(--serif);line-height:1.15;margin:0}
+header.hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#2b2119,#17120e);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1.1rem;margin-bottom:1rem;border-bottom:5px solid var(--amber)}
+header.hero h1,header.hero p{position:relative;z-index:1}
+header.hero h1{font-size:clamp(1.8rem,7.5vw,2.7rem);color:var(--amber2)}
+header.hero p{margin:.35rem 0 0;color:var(--muted);max-width:34rem}
+.disc{position:absolute;right:-2.2rem;top:-2.2rem;width:9.5rem;height:9.5rem;border-radius:50%;background:repeating-radial-gradient(circle,#1c1a18 0 3px,#262320 3px 5px);box-shadow:0 0 0 3px #3a3633;opacity:.35;z-index:0}
+.disc:after{content:"";position:absolute;inset:36%;border-radius:50%;background:var(--amber);box-shadow:inset 0 0 0 3px #b97a1a}
+.stats{display:flex;flex-wrap:wrap;gap:.4rem;margin:.9rem 0 0;padding:0;list-style:none;position:relative}
+.stats li{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:.15rem .75rem;font-size:.92rem;font-weight:600}
+.stats li.total{background:var(--amber);color:#2a1a00;border-color:var(--amber)}
+section.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;margin-bottom:1rem}
+.panel-head{display:flex;align-items:center;gap:.6rem;margin:0 0 .8rem}
+.panel-head h2{font-size:1.45rem;color:var(--amber2)}
+.count{margin-left:auto;background:var(--amber);color:#2a1a00;font-weight:700;border-radius:999px;padding:.05rem .65rem;font-size:.9rem;white-space:nowrap}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.controls label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem}
+.controls .search{grid-column:1/-1}
+.controls input,.controls select{width:100%;font:inherit;font-size:1rem;padding:.55rem .7rem;border:2px solid var(--line);border-radius:12px;background:#17130f;color:var(--ink)}
+.controls input:focus,.controls select:focus{outline:none;border-color:var(--amber)}
+.showing{margin:.7rem 0 0;font-size:.9rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}
+@media(min-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:800px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(5,1fr)}}
+.rec{display:flex;flex-direction:column;background:var(--card2);border:1px solid var(--line);border-radius:12px;overflow:hidden;color:inherit;text-decoration:none;transition:transform .15s,border-color .15s}
+.rec:hover{transform:translateY(-2px);border-color:var(--amber)}
+.rec .art{aspect-ratio:1/1;background:#17130f;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem;text-align:center;padding:.5rem}
+.rec .art img{width:100%;height:100%;object-fit:cover;display:block}
+.rec .meta{padding:.5rem .6rem .65rem;display:flex;flex-direction:column;gap:.1rem;flex:1}
+.rec .t{font-weight:700;font-size:.92rem;line-height:1.25;overflow-wrap:anywhere}
+.rec .a{font-size:.82rem;color:var(--muted)}
+.rec .sub{font-size:.76rem;color:var(--muted)}
+.rec .v{margin-top:auto;padding-top:.3rem;font-weight:800;color:var(--amber2);font-size:1.02rem;font-variant-numeric:tabular-nums}
+.rec .v.na{color:var(--muted);font-weight:600;font-size:.85rem}
+.hifi{display:grid;gap:.6rem;grid-template-columns:1fr}
+@media(min-width:640px){.hifi{grid-template-columns:1fr 1fr}}
+.hf{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:.7rem .8rem}
+.hf .ty{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--amber)}
+.hf .md{font-weight:700;margin:.1rem 0}
+.hf .nt{font-size:.85rem;color:var(--muted)}
+.empty{text-align:center;color:var(--muted);padding:1.5rem 0}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:.5rem 0}
+.share-actions{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:.6rem}
+.share-btn,.open-browser{font:inherit;font-weight:700;font-size:.95rem;border-radius:999px;padding:.5rem 1.1rem;border:2px solid var(--amber);text-decoration:none;cursor:pointer}
+.share-btn{background:var(--amber);color:#2a1a00}.open-browser{background:transparent;color:var(--amber2)}
+.share-url{margin:.5rem 0 0;font-size:.78rem;word-break:break-all}
+.share-status{min-height:1.2em;margin:.2rem 0 0;font-weight:700;color:var(--green)}
+.small-print{font-size:.76rem;margin-top:.8rem}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="hero">
+<div class="disc" aria-hidden="true"></div>
+<h1>Rich's Vinyl Records</h1>
+<p>Every record on the shelf, with its current Discogs value, plus the hi-fi that plays them.</p>
+<ul class="stats" id="stats"></ul>
+</header>
+
+<section class="panel" aria-label="Search and sort">
+<div class="controls">
+<div class="search"><label for="q">Search records</label><input id="q" type="search" placeholder="Artist or album, e.g. Nirvana" autocomplete="off"></div>
+<div><label for="sort">Sort by</label>
+<select id="sort">
+<option value="artist">Artist (A–Z)</option>
+<option value="value-desc">Value (high to low)</option>
+<option value="value-asc">Value (low to high)</option>
+<option value="year-asc">Year (oldest first)</option>
+<option value="year-desc">Year (newest first)</option>
+<option value="added-desc">Date added (newest first)</option>
+<option value="added-asc">Date added (oldest first)</option>
+</select></div>
+<div class="search"><label for="count-note">Showing</label><input id="count-note" disabled value=""></div>
+</div>
+<p class="showing">Values are the lowest current Discogs marketplace price, checked 22 November 2026. Tap a cover to see it on Discogs.</p>
+</section>
+
+<section class="panel" id="records">
+<div class="panel-head"><h2>Records</h2><span class="count" id="rec-count"></span></div>
+<div class="grid" id="grid"></div>
+<p class="empty" id="empty" hidden>No records match your search.</p>
+</section>
+
+<section class="panel" id="hifi">
+<div class="panel-head"><h2>Hi-fi</h2><span class="count" id="hifi-count"></span></div>
+<div class="hifi" id="hifi-list"></div>
+</section>
+
+<footer>
+<p id="updated"></p>
+<div class="share-bar">
+<div class="share-actions">
+<button type="button" class="share-btn" data-share>Share this page</button>
+<a class="open-browser" href="https://kk544nmsbt-sudo.github.io/vinyl-records/" target="_blank" rel="noopener">Open in browser</a>
+</div>
+<p class="share-url">https://kk544nmsbt-sudo.github.io/vinyl-records/</p>
+<p class="share-status" data-share-status aria-live="polite"></p>
+</div>
+<p class="small-print">A personal fan page, not affiliated with any artist or label. Cover art © the respective artists and labels, via Discogs. Values are estimates from Discogs and change over time.</p>
+</footer>
+</div>
+
+<script>
+/* ===== COLLECTION DATA (single source of truth) =====
+   Update by regenerating the RECORDS and HIFI arrays, then bump SITE_VERSION and version.json
+   to the same new value so the iPhone Home Screen app picks up the new page. */
+var RECORDS=[{"artist": "Arctic Monkeys", "title": "Whatever People Say I Am, That's What I'm Not", "year": 2006, "added": "2025-10-11", "value": 23.38, "format": "LP", "cover": "images/covers/612972.webp", "url": "https://www.discogs.com/release/612972"}, {"artist": "Coldplay", "title": "A Rush Of Blood To The Head", "year": null, "added": "2025-10-12", "value": 16.72, "format": "LP", "cover": "images/covers/6737288.webp", "url": "https://www.discogs.com/release/6737288"}, {"artist": "Coldplay", "title": "Parachutes", "year": null, "added": "2025-10-12", "value": 18.59, "format": "LP", "cover": "images/covers/16177934.webp", "url": "https://www.discogs.com/release/16177934"}, {"artist": "Ed Sheeran", "title": "+", "year": 2011, "added": "2025-10-12", "value": 9.99, "format": "LP", "cover": "images/covers/3129886.webp", "url": "https://www.discogs.com/release/3129886"}, {"artist": "Ed Sheeran", "title": "= (Equals)", "year": 2021, "added": "2025-10-12", "value": 11.07, "format": "LP", "cover": "images/covers/26381726.webp", "url": "https://www.discogs.com/release/26381726"}, {"artist": "Ed Sheeran", "title": "+-=÷× (Tour Collection)", "year": 2024, "added": "2025-10-12", "value": 19.0, "format": "2 × LP", "cover": "images/covers/31699214.webp", "url": "https://www.discogs.com/release/31699214"}, {"artist": "Eric Clapton", "title": "The Cream Of Eric Clapton", "year": 1987, "added": "2025-10-12", "value": 3.03, "format": "LP", "cover": "images/covers/5254323.webp", "url": "https://www.discogs.com/release/5254323"}, {"artist": "Finley Quaye", "title": "Maverick A Strike", "year": 2022, "added": "2025-10-12", "value": 35.0, "format": "LP", "cover": "images/covers/24819026.webp", "url": "https://www.discogs.com/release/24819026"}, {"artist": "Green Jellÿ", "title": "Three Little Pigs", "year": 1993, "added": "2025-10-12", "value": 2.38, "format": "7-inch single", "cover": "images/covers/886290.webp", "url": "https://www.discogs.com/release/886290"}, {"artist": "Jamiroquai", "title": "A Funk Odyssey", "year": 2022, "added": "2025-10-12", "value": 17.53, "format": "2 × LP", "cover": "images/covers/25041760.webp", "url": "https://www.discogs.com/release/25041760"}, {"artist": "Jamiroquai", "title": "Emergency On Planet Earth", "year": 2022, "added": "2025-10-12", "value": 22.69, "format": "2 × LP", "cover": "images/covers/24817685.webp", "url": "https://www.discogs.com/release/24817685"}, {"artist": "Joy Division", "title": "Closer", "year": 2015, "added": "2025-10-12", "value": 10.01, "format": "LP", "cover": "images/covers/7132429.webp", "url": "https://www.discogs.com/release/7132429"}, {"artist": "Joy Division", "title": "Substance", "year": 2015, "added": "2025-10-12", "value": 21.26, "format": "2 × LP", "cover": "images/covers/7132351.webp", "url": "https://www.discogs.com/release/7132351"}, {"artist": "Joy Division", "title": "Unknown Pleasures", "year": 2015, "added": "2025-10-12", "value": 14.11, "format": "LP", "cover": "images/covers/7132498.webp", "url": "https://www.discogs.com/release/7132498"}, {"artist": "Kings Of Leon", "title": "When You See Yourself", "year": 2021, "added": "2025-10-12", "value": 9.99, "format": "2 × LP", "cover": "images/covers/17682106.webp", "url": "https://www.discogs.com/release/17682106"}, {"artist": "Kings Of Leon", "title": "Only By The Night", "year": null, "added": "2025-10-12", "value": 21.25, "format": "2 × LP", "cover": "images/covers/27037191.webp", "url": "https://www.discogs.com/release/27037191"}, {"artist": "Kula Shaker", "title": "K", "year": 2025, "added": "2025-10-15", "value": 83.6, "format": "LP", "cover": "images/covers/35258515.webp", "url": "https://www.discogs.com/release/35258515"}, {"artist": "Led Zeppelin", "title": "Led Zeppelin III", "year": 2014, "added": "2025-10-12", "value": 10.63, "format": "LP", "cover": "images/covers/5770432.webp", "url": "https://www.discogs.com/release/5770432"}, {"artist": "Led Zeppelin", "title": "Led Zeppelin", "year": 2020, "added": "2025-10-12", "value": 12.44, "format": "LP", "cover": "images/covers/19887778.webp", "url": "https://www.discogs.com/release/19887778"}, {"artist": "Led Zeppelin", "title": "Led Zeppelin II", "year": 2020, "added": "2025-10-12", "value": 14.96, "format": "LP", "cover": "images/covers/19502752.webp", "url": "https://www.discogs.com/release/19502752"}, {"artist": "Led Zeppelin", "title": "Untitled", "year": 2020, "added": "2025-10-12", "value": 12.76, "format": "LP", "cover": "images/covers/18861868.webp", "url": "https://www.discogs.com/release/18861868"}, {"artist": "Massive Attack", "title": "Blue Lines", "year": 2019, "added": "2025-10-12", "value": 55.0, "format": "LP", "cover": "images/covers/14601248.webp", "url": "https://www.discogs.com/release/14601248"}, {"artist": "Nirvana", "title": "Bleach", "year": 2009, "added": "2025-10-12", "value": 19.0, "format": "2 × LP", "cover": "images/covers/2652102.webp", "url": "https://www.discogs.com/release/2652102"}, {"artist": "Nirvana", "title": "Live At Reading", "year": 2009, "added": "2025-10-12", "value": 20.0, "format": "2 × LP", "cover": "images/covers/2070548.webp", "url": "https://www.discogs.com/release/2070548"}, {"artist": "Nirvana", "title": "Incesticide", "year": 2012, "added": "2025-10-12", "value": 57.0, "format": "2 × LP", "cover": "images/covers/4054009.webp", "url": "https://www.discogs.com/release/4054009"}, {"artist": "Nirvana", "title": "In Utero", "year": 2015, "added": "2025-10-12", "value": 17.47, "format": "LP", "cover": "images/covers/22912757.webp", "url": "https://www.discogs.com/release/22912757"}, {"artist": "Nirvana", "title": "MTV Unplugged In New York", "year": 2017, "added": "2025-10-12", "value": 16.72, "format": "LP", "cover": "images/covers/11400290.webp", "url": "https://www.discogs.com/release/11400290"}, {"artist": "Nirvana", "title": "Nevermind", "year": 2021, "added": "2025-10-12", "value": 26.56, "format": "7-inch single", "cover": "images/covers/20914213.webp", "url": "https://www.discogs.com/release/20914213"}, {"artist": "Nirvana", "title": "Live At Paradiso, Amsterdam - November 25, 1991", "year": 2022, "added": "2026-11-22", "value": 18.66, "format": "LP", "cover": "images/covers/23408399.webp", "url": "https://www.discogs.com/release/23408399"}, {"artist": "Oasis", "title": "(What's The Story) Morning Glory?", "year": 2014, "added": "2025-10-12", "value": 19.0, "format": "2 × LP", "cover": "images/covers/6127871.webp", "url": "https://www.discogs.com/release/6127871"}, {"artist": "Oasis", "title": "Definitely Maybe", "year": 2014, "added": "2025-10-12", "value": 20.88, "format": "2 × LP", "cover": "images/covers/5697791.webp", "url": "https://www.discogs.com/release/5697791"}, {"artist": "Oasis", "title": "The Masterplan", "year": 2023, "added": "2025-10-12", "value": 23.38, "format": "2 × LP", "cover": "images/covers/28819975.webp", "url": "https://www.discogs.com/release/28819975"}, {"artist": "Ocean Colour Scene", "title": "Yesterday Today 1992-1997", "year": 2023, "added": "2025-10-12", "value": 65.0, "format": "LP", "cover": "images/covers/26197274.webp", "url": "https://www.discogs.com/release/26197274"}, {"artist": "Pearl Jam", "title": "Vitalogy", "year": 2016, "added": "2025-10-12", "value": 20.84, "format": "2 × LP", "cover": "images/covers/8392718.webp", "url": "https://www.discogs.com/release/8392718"}, {"artist": "Pearl Jam", "title": "Vs.", "year": 2016, "added": "2025-10-12", "value": 16.7, "format": "LP", "cover": "images/covers/8354355.webp", "url": "https://www.discogs.com/release/8354355"}, {"artist": "Pearl Jam", "title": "Ten", "year": 2017, "added": "2025-10-12", "value": 11.69, "format": "LP", "cover": "images/covers/11116451.webp", "url": "https://www.discogs.com/release/11116451"}, {"artist": "Pearl Jam", "title": "MTV Unplugged", "year": 2020, "added": "2025-10-12", "value": null, "format": "LP", "cover": "images/covers/17525236.webp", "url": "https://www.discogs.com/release/17525236"}, {"artist": "Pulp", "title": "Different Class", "year": 2016, "added": "2025-10-12", "value": 20.99, "format": "LP", "cover": "images/covers/8668192.webp", "url": "https://www.discogs.com/release/8668192"}, {"artist": "Queen", "title": "A Day At The Races", "year": 1976, "added": "2025-10-12", "value": 12.48, "format": "LP", "cover": "images/covers/2418229.webp", "url": "https://www.discogs.com/release/2418229"}, {"artist": "Queen", "title": "A Night At The Opera", "year": 1976, "added": "2025-10-12", "value": 12.52, "format": "LP", "cover": "images/covers/4236474.webp", "url": "https://www.discogs.com/release/4236474"}, {"artist": "Queen", "title": "Greatest Hits", "year": 2016, "added": "2025-10-12", "value": 10.0, "format": "2 × LP", "cover": "images/covers/9371072.webp", "url": "https://www.discogs.com/release/9371072"}, {"artist": "Queen", "title": "Greatest Hits II", "year": 2016, "added": "2025-10-12", "value": 20.0, "format": "2 × LP", "cover": "images/covers/9370710.webp", "url": "https://www.discogs.com/release/9370710"}, {"artist": "Radiohead", "title": "In Rainbows", "year": 2017, "added": "2025-10-12", "value": 20.72, "format": "LP", "cover": "images/covers/29986885.webp", "url": "https://www.discogs.com/release/29986885"}, {"artist": "Radiohead", "title": "OK Computer OKNOTOK 1997 2017", "year": 2017, "added": "2025-10-12", "value": 25.05, "format": "2 × LP", "cover": "images/covers/10505306.webp", "url": "https://www.discogs.com/release/10505306"}, {"artist": "Radiohead", "title": "Kid A Mnesia", "year": 2021, "added": "2025-10-12", "value": 29.23, "format": "LP", "cover": "images/covers/20857672.webp", "url": "https://www.discogs.com/release/20857672"}, {"artist": "Radiohead", "title": "Hail To The Thief", "year": 2022, "added": "2025-10-12", "value": 15.2, "format": "2 × LP", "cover": "images/covers/25815409.webp", "url": "https://www.discogs.com/release/25815409"}, {"artist": "Radiohead", "title": "A Moon Shaped Pool", "year": 2023, "added": "2025-10-12", "value": 18.5, "format": "2 × LP", "cover": "images/covers/28204645.webp", "url": "https://www.discogs.com/release/28204645"}, {"artist": "Radiohead", "title": "The King Of Limbs", "year": 2024, "added": "2025-10-12", "value": 22.94, "format": "LP", "cover": "images/covers/32478543.webp", "url": "https://www.discogs.com/release/32478543"}, {"artist": "Radiohead", "title": "The Bends", "year": null, "added": "2025-10-12", "value": 20.0, "format": "LP", "cover": "images/covers/29987029.webp", "url": "https://www.discogs.com/release/29987029"}, {"artist": "Rage Against The Machine", "title": "Rage Against The Machine", "year": 2025, "added": "2025-10-12", "value": 17.54, "format": "LP", "cover": "images/covers/33453083.webp", "url": "https://www.discogs.com/release/33453083"}, {"artist": "Richard Ashcroft", "title": "Acoustic Hymns Vol 1", "year": 2021, "added": "2025-10-12", "value": 15.03, "format": "2 × LP", "cover": "images/covers/20784193.webp", "url": "https://www.discogs.com/release/20784193"}, {"artist": "Rick Astley", "title": "Whenever You Need Somebody", "year": 1987, "added": "2025-10-12", "value": 1.36, "format": "LP", "cover": "images/covers/11416554.webp", "url": "https://www.discogs.com/release/11416554"}, {"artist": "The Smashing Pumpkins", "title": "Gish", "year": 2011, "added": "2025-10-12", "value": 15.19, "format": "LP", "cover": "images/covers/3266516.webp", "url": "https://www.discogs.com/release/3266516"}, {"artist": "The Smashing Pumpkins", "title": "Siamese Dream", "year": 2011, "added": "2025-10-12", "value": 7.6, "format": "2 × LP", "cover": "images/covers/3255473.webp", "url": "https://www.discogs.com/release/3255473"}, {"artist": "The Smashing Pumpkins", "title": "Pisces Iscariot", "year": 2012, "added": "2025-10-12", "value": 18.6, "format": "2 × LP", "cover": "images/covers/3731972.webp", "url": "https://www.discogs.com/release/3731972"}, {"artist": "Stereophonics", "title": "Performance And Cocktails", "year": 2016, "added": "2025-10-12", "value": 17.85, "format": "LP", "cover": "images/covers/9448080.webp", "url": "https://www.discogs.com/release/9448080"}, {"artist": "Stone Temple Pilots", "title": "Core", "year": 2023, "added": "2025-10-12", "value": 25.84, "format": "LP", "cover": "images/covers/28579609.webp", "url": "https://www.discogs.com/release/28579609"}, {"artist": "Talking Heads", "title": "Stop Making Sense (Music From A Film By Jonathan Demme And Talking Heads)", "year": 2024, "added": "2025-10-12", "value": 20.52, "format": "2 × LP", "cover": "images/covers/31314258.webp", "url": "https://www.discogs.com/release/31314258"}, {"artist": "The Beatles", "title": "Help!", "year": 1976, "added": "2025-10-12", "value": 10.0, "format": "LP", "cover": "images/covers/1856744.webp", "url": "https://www.discogs.com/release/1856744"}, {"artist": "The Beatles", "title": "Past Masters", "year": 2012, "added": "2025-10-12", "value": 27.39, "format": "2 × LP", "cover": "images/covers/4036975.webp", "url": "https://www.discogs.com/release/4036975"}, {"artist": "The Beatles", "title": "The Beatles", "year": 2018, "added": "2025-10-12", "value": 28.4, "format": "2 × LP", "cover": "images/covers/12770560.webp", "url": "https://www.discogs.com/release/12770560"}, {"artist": "The Beatles", "title": "Abbey Road", "year": 2019, "added": "2025-10-12", "value": 14.86, "format": "LP", "cover": "images/covers/14186441.webp", "url": "https://www.discogs.com/release/14186441"}, {"artist": "The Beatles", "title": "A Hard Day's Night", "year": 2020, "added": "2025-10-12", "value": 13.68, "format": "LP", "cover": "images/covers/15825454.webp", "url": "https://www.discogs.com/release/15825454"}, {"artist": "The Beatles", "title": "Let It Be", "year": 2021, "added": "2025-10-12", "value": 15.2, "format": "LP", "cover": "images/covers/20599078.webp", "url": "https://www.discogs.com/release/20599078"}, {"artist": "The Beatles", "title": "1962-1966", "year": 2023, "added": "2025-10-12", "value": 53.74, "format": "3 × LP", "cover": "images/covers/28859305.webp", "url": "https://www.discogs.com/release/28859305"}, {"artist": "The Beatles", "title": "1967-1970", "year": 2023, "added": "2025-10-12", "value": 33.4, "format": "3 × LP", "cover": "images/covers/28859359.webp", "url": "https://www.discogs.com/release/28859359"}, {"artist": "The Beatles", "title": "Magical Mystery Tour", "year": null, "added": "2025-10-12", "value": null, "format": "LP", "cover": "images/covers/7361263.webp", "url": "https://www.discogs.com/release/7361263"}, {"artist": "The Beatles", "title": "Revolver", "year": null, "added": "2025-10-12", "value": 15.86, "format": "LP", "cover": "images/covers/4453244.webp", "url": "https://www.discogs.com/release/4453244"}, {"artist": "The Beatles", "title": "Rubber Soul", "year": null, "added": "2025-10-12", "value": 8.31, "format": "LP", "cover": "images/covers/2325133.webp", "url": "https://www.discogs.com/release/2325133"}, {"artist": "The Beatles", "title": "Sgt. Pepper's Lonely Hearts Club Band", "year": null, "added": "2025-10-12", "value": 11.27, "format": "LP", "cover": "images/covers/4581849.webp", "url": "https://www.discogs.com/release/4581849"}, {"artist": "The Black Keys", "title": "Magic Potion", "year": 2006, "added": "2025-10-12", "value": 13.68, "format": "LP", "cover": "images/covers/1779487.webp", "url": "https://www.discogs.com/release/1779487"}, {"artist": "The Black Keys", "title": "El Camino", "year": 2021, "added": "2025-10-12", "value": 33.41, "format": "LP", "cover": "images/covers/20830486.webp", "url": "https://www.discogs.com/release/20830486"}, {"artist": "The Black Keys", "title": "Dropout Boogie", "year": 2022, "added": "2025-10-12", "value": 9.12, "format": "LP", "cover": "images/covers/23188091.webp", "url": "https://www.discogs.com/release/23188091"}, {"artist": "The Jimi Hendrix Experience", "title": "Are You Experienced", "year": 2014, "added": "2025-10-12", "value": 13.67, "format": "LP", "cover": "images/covers/8541806.webp", "url": "https://www.discogs.com/release/8541806"}, {"artist": "The Rolling Stones", "title": "Rolled Gold - The Very Best Of The Rolling Stones", "year": 1975, "added": "2025-10-12", "value": 4.5, "format": "2 × LP", "cover": "images/covers/26933498.webp", "url": "https://www.discogs.com/release/26933498"}, {"artist": "The Smashing Pumpkins", "title": "Mellon Collie And The Infinite Sadness", "year": 2012, "added": "2025-10-12", "value": 58.9, "format": "4 × LP", "cover": "images/covers/4082874.webp", "url": "https://www.discogs.com/release/4082874"}, {"artist": "The Smashing Pumpkins", "title": "Pure Acoustic Unplugged & More 1993", "year": 2020, "added": "2026-11-22", "value": null, "format": "2 × LP", "cover": "images/covers/16135637.webp", "url": "https://www.discogs.com/release/16135637"}, {"artist": "The Smashing Pumpkins", "title": "Aghori Mhori Mei", "year": 2024, "added": "2025-10-12", "value": 12.92, "format": "LP", "cover": "images/covers/32366532.webp", "url": "https://www.discogs.com/release/32366532"}, {"artist": "The Smile", "title": "A Light For Attracting Attention", "year": 2022, "added": "2025-10-12", "value": 17.62, "format": "2 × LP", "cover": "images/covers/23608229.webp", "url": "https://www.discogs.com/release/23608229"}, {"artist": "The Smile", "title": "Cutouts", "year": 2024, "added": "2025-10-12", "value": 19.99, "format": "LP", "cover": "images/covers/31875967.webp", "url": "https://www.discogs.com/release/31875967"}, {"artist": "The Smile", "title": "Wall Of Eyes", "year": 2024, "added": "2025-10-12", "value": 15.89, "format": "LP", "cover": "images/covers/28919746.webp", "url": "https://www.discogs.com/release/28919746"}, {"artist": "The Verve", "title": "Urban Hymns", "year": 2022, "added": "2025-10-12", "value": 22.28, "format": "2 × LP", "cover": "images/covers/27172914.webp", "url": "https://www.discogs.com/release/27172914"}, {"artist": "The White Stripes", "title": "Get Behind Me Satan", "year": 2021, "added": "2025-10-12", "value": 18.5, "format": "2 × LP", "cover": "images/covers/21396622.webp", "url": "https://www.discogs.com/release/21396622"}, {"artist": "The White Stripes", "title": "De Stijl", "year": 2022, "added": "2025-10-12", "value": 17.99, "format": "LP", "cover": "images/covers/22649960.webp", "url": "https://www.discogs.com/release/22649960"}, {"artist": "The White Stripes", "title": "Elephant", "year": 2022, "added": "2025-10-12", "value": 20.72, "format": "2 × LP", "cover": "images/covers/22105831.webp", "url": "https://www.discogs.com/release/22105831"}, {"artist": "The White Stripes", "title": "Icky Thump", "year": 2022, "added": "2025-10-12", "value": 21.26, "format": "2 × LP", "cover": "images/covers/23755601.webp", "url": "https://www.discogs.com/release/23755601"}, {"artist": "The White Stripes", "title": "The White Stripes", "year": 2022, "added": "2025-10-12", "value": 17.12, "format": "LP", "cover": "images/covers/22660364.webp", "url": "https://www.discogs.com/release/22660364"}, {"artist": "The White Stripes", "title": "Elephant", "year": 2023, "added": "2025-10-12", "value": 22.85, "format": "LP", "cover": "images/covers/26820938.webp", "url": "https://www.discogs.com/release/26820938"}];var HIFI=[{"item": "Amplifier/receiver", "model": "Cambridge Audio AXR100", "type": "Amplifier", "bought": "", "notes": "To confirm"}, {"item": "Turntable", "model": "Pro-Ject Debut Carbon", "type": "Turntable", "bought": "", "notes": "Possibly the Carbon EVO; to confirm"}, {"item": "Cartridge/stylus", "model": "Ortofon 2M Blue", "type": "Cartridge", "bought": "2022-12", "notes": ""}, {"item": "Sub-platter upgrade", "model": "Pro-Ject aluminium sub-platter", "type": "Upgrade", "bought": "2023-12", "notes": ""}, {"item": "Speakers", "model": "KEF Q350", "type": "Speakers", "bought": "", "notes": "On stands"}, {"item": "Headphones", "model": "HiFiMan Sundara", "type": "Headphones", "bought": "", "notes": ""}, {"item": "Accessories", "model": "Pro-Ject Brush it record brush; DIGITNOW stylus gauge; record weight; TNP 12AWG speaker cable", "type": "Accessories", "bought": "", "notes": ""}];
+var SITE_VERSION="2026-11-24-1";
+var PAGE_URL="https://kk544nmsbt-sudo.github.io/vinyl-records/";
+var UPDATED="22 November 2026";
+/* ===== END DATA ===== */
+(function(){
+function checkSiteVersion(){
+ if(window.__vb)return;window.__vb=true;
+ fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():Promise.reject()}).then(function(d){
+  var v=d&&d.version?String(d.version):'';if(!v||v===SITE_VERSION)return;
+  var key='site-reload-'+v;try{if(sessionStorage.getItem(key))return}catch(e){}
+  var p=new URLSearchParams(location.search);if(p.get('v')===v)return;
+  try{sessionStorage.setItem(key,'1')}catch(e){}
+  p.set('v',v);location.replace(location.pathname+'?'+p.toString()+location.hash);
+ }).catch(function(){}).then(function(){window.__vb=false});
+}
+checkSiteVersion();
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')checkSiteVersion()});
+window.addEventListener('pageshow',checkSiteVersion);
+function copyUrl(st){
+ var ok=function(){st.textContent='Link copied';setTimeout(function(){st.textContent=''},2000)};
+ try{var t=document.createElement('textarea');t.value=PAGE_URL;t.style.position='fixed';t.style.left='-9999px';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);ok()}catch(e){}
+}
+document.querySelectorAll('[data-share]').forEach(function(b){b.addEventListener('click',function(){
+ var st=b.closest('.share-bar').querySelector('[data-share-status]');
+ if(navigator.share){navigator.share({title:document.title,url:PAGE_URL}).catch(function(e){if(e&&e.name==='AbortError')return;copyUrl(st)})}
+ else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(PAGE_URL).then(function(){st.textContent='Link copied';setTimeout(function(){st.textContent=''},2000)}).catch(function(){copyUrl(st)})}
+ else copyUrl(st);
+})});
+})();
+
+(function(){
+function gbp(n){return '£'+n.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function key(s){return s.replace(/^The\s+/i,'').toLowerCase()}
+function fmtDate(d){return new Date(d+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'})}
+function cmpName(a,b){return key(a.artist).localeCompare(key(b.artist),'en-GB')||(a.year||9999)-(b.year||9999)||key(a.title).localeCompare(key(b.title),'en-GB')}
+var sorters={
+ 'artist':cmpName,
+ 'value-desc':function(a,b){return (b.value==null?-1:b.value)-(a.value==null?-1:a.value)||cmpName(a,b)},
+ 'value-asc':function(a,b){return (a.value==null?1e9:a.value)-(b.value==null?1e9:b.value)||cmpName(a,b)},
+ 'year-asc':function(a,b){return (a.year||9999)-(b.year||9999)||cmpName(a,b)},
+ 'year-desc':function(a,b){return (b.year||0)-(a.year||0)||cmpName(a,b)},
+ 'added-desc':function(a,b){return b.added<a.added?-1:b.added>a.added?1:cmpName(a,b)},
+ 'added-asc':function(a,b){return a.added<b.added?-1:a.added>b.added?1:cmpName(a,b)}
+};
+var total=RECORDS.reduce(function(s,r){return s+(r.value||0)},0);
+document.getElementById('stats').innerHTML='<li>'+RECORDS.length+' records</li><li class="total">Collection value '+gbp(total)+'</li><li>Average '+gbp(total/RECORDS.filter(function(r){return r.value!=null}).length)+'</li>';
+document.getElementById('updated').textContent='Last updated '+UPDATED;
+document.getElementById('rec-count').textContent=RECORDS.length;
+var q=document.getElementById('q'),sort=document.getElementById('sort'),grid=document.getElementById('grid'),note=document.getElementById('count-note'),empty=document.getElementById('empty');
+function render(){
+ var term=q.value.trim().toLowerCase();
+ var list=RECORDS.filter(function(r){return !term||(r.artist+' '+r.title+' '+(r.year||'')).toLowerCase().indexOf(term)>-1}).sort(sorters[sort.value]);
+ var sub=list.reduce(function(s,r){return s+(r.value||0)},0);
+ note.value=term?list.length+' of '+RECORDS.length+' · '+gbp(sub):RECORDS.length+' records · '+gbp(sub);
+ empty.hidden=list.length>0;
+ grid.innerHTML=list.map(function(r,i){
+  var art=r.cover?'<img src="'+esc(r.cover)+'" alt="Cover of '+esc(r.title)+' by '+esc(r.artist)+'" width="400" height="400" loading="lazy">':'Cover not available';
+  var v=r.value!=null?'<div class="v">'+gbp(r.value)+'</div>':'<div class="v na">Value not available</div>';
+  return '<a class="rec" href="'+esc(r.url)+'" target="_blank" rel="noopener"><div class="art">'+art+'</div><div class="meta"><div class="t">'+esc(r.title)+'</div><div class="a">'+esc(r.artist)+'</div><div class="sub">'+(r.year||'Year unknown')+' · '+esc(r.format)+'</div><div class="sub">Added '+fmtDate(r.added)+'</div>'+v+'</div></a>';
+ }).join('');
+}
+q.addEventListener('input',render);sort.addEventListener('change',render);render();
+document.getElementById('hifi-count').textContent=HIFI.length;
+function mon(s){if(!s)return '';var p=s.split('-');return new Date(Date.UTC(+p[0],+p[1]-1,1)).toLocaleDateString('en-GB',{month:'long',year:'numeric',timeZone:'UTC'})}
+document.getElementById('hifi-list').innerHTML=HIFI.map(function(h){
+ var n=[];if(h.bought)n.push('Bought '+mon(h.bought));if(h.notes)n.push(h.notes);
+ return '<div class="hf"><div class="ty">'+esc(h.item)+'</div><div class="md">'+esc(h.model)+'</div><div class="nt">'+esc(n.join(' · '))+'</div></div>';
+}).join('');
+})();
+</script>
+</body>
+</html>
